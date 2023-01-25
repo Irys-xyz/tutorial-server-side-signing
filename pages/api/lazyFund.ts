@@ -1,6 +1,5 @@
 import Bundlr from "@bundlr-network/client/build/node";
 import type { NextApiRequest, NextApiResponse } from "next";
-import HexInjectedSolanaSigner from "arbundles/src/signing/chains/HexInjectedSolanaSigner";
 
 /**
  * Given a file of the specified size, get the cost to upload, then fund a node that amount

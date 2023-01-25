@@ -98,47 +98,6 @@ export default function Home() {
 		console.log(`File uploaded ==> https://arweave.net/${tx.id}`);
 		setMessage(`File uploaded ==>`);
 		setFileUploadedURL("https://arweave.net/" + tx.id);
-
-		// const tx = bundlr.createTransaction(dataStream, {
-		// 	tags: [{ name: "Content-Type", value: fileType }],
-		// });
-
-		// await tx.sign();
-		// //@ts-ignore
-		// // const tx2 = bundlr.createTransaction(tx.getRaw(), { dataIsRawTransaction: true });
-		// // await tx2.sign();
-		// // const signature = await provider.signMessage(await tx.getSignatureData());
-		// // await tx.setSignature(signature);
-
-		// console.log({
-		// 	sig: tx.rawSignature,
-		// 	owner: tx.rawOwner,
-		// 	data: tx.rawData.toString(),
-		// });
-		// console.log(dataStream);
-		// console.log(tx.getRaw());
-		// // const tx = await bundlr.upload(dataStream, {
-		// // 	tags: [{ name: "Content-Type", value: fileType }],
-		// // });
-
-		// // const uploader = bundlr.uploader.chunkedUploader;
-		// // uploader.setBatchSize(2);
-		// // uploader.setChunkSize(2_000_000);
-		// // const tx = await uploader.uploadData(dataStream, {
-		// // 	tags: [{ name: "Content-Type", value: fileType }],
-		// // });
-
-		// console.log("signed tx=", tx);
-
-		// // make sure isValid is true - don't worry about isSigned.
-		// console.log({
-		// 	isSigned: tx.isSigned(),
-		// 	isValid: await tx.isValid(),
-		// });
-
-		// // upload as normal
-		// const res = await tx.upload();
-		// console.log(res);
 	};
 
 	return (
