@@ -30,6 +30,10 @@ To switch from Devnet to production, you'll need to:
 2. Change BUNDLR_NODE_ADDRESS in the .env file
 3. Change the RPC url in the .env file
 
+## Changing Currency
+
+To change the payment currency, update the RPC .env variable and [also the currency name](/sdk/using-other-currencies) in all places where a Bundlr or WebBundlr object is instantiated.
+
 ## Server Routes
 
 There are three server routes called by our main `index.tsx` page.
