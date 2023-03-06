@@ -30,16 +30,11 @@ export async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
 		signatureData,
 		signature,
 	);
-	console.log({ isValid });
 
 	return Buffer.from(signature);
 }
-// req: NextApiRequest,
-// res: NextApiResponse,
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse,
-) {
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const body = JSON.parse(req.body);
 	const signatureData = Buffer.from(body.signatureData, "hex");
 	const signature = await signDataOnServer(signatureData);
