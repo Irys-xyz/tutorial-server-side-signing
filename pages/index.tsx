@@ -1,11 +1,8 @@
-import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
-
 import WebBundlr from "@bundlr-network/client/build/web";
-import { PublicKey } from "@solana/web3.js";
 import fileReaderStream from "filereader-stream";
-import * as fs from "fs";
+
+
 
 export default function Home() {
 	const [message, setMessage] = useState<string>("");
@@ -45,16 +42,13 @@ export default function Home() {
 		// create a provider
 		const provider = {
 			// for ETH wallets
-			publicKey: {
-				toBuffer: () => pubKey,
-				byteLength: 65,
+			getPublicKey: async () => {
+				return pubKey;
 			},
-			// for SOLANA wallets
-			// publicKey: {
-			// 	toBuffer: () => pubKey,
-			// 	byteLength: 32,
-			// },
-			signMessage: async (message: Uint8Array) => {
+			getSigner: () => {
+				return provider;
+			},
+			signMessage: async (message: any) => {
 				let convertedMsg = Buffer.from(message).toString("hex");
 				const res = await fetch("/api/signData", {
 					method: "POST",
@@ -64,7 +58,11 @@ export default function Home() {
 				});
 				const { signature } = await res.json();
 				const bSig = Buffer.from(signature, "hex");
-				return bSig;
+				if (message === "sign this message to connect to Bundlr.Network") return bSig;
+				// pad & convert so it's in the format the signer expects to have to convert from.
+				const pad = Buffer.concat([Buffer.from([0]), Buffer.from(bSig)]).toString("hex");
+				return pad;
+
 			},
 		};
 

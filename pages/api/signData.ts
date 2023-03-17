@@ -1,6 +1,6 @@
 import Bundlr from "@bundlr-network/client/build/node";
 import type { NextApiRequest, NextApiResponse } from "next";
-import HexInjectedSolanaSigner from "arbundles/src/signing/chains/HexInjectedSolanaSigner";
+import EthereumSigner from "arbundles/src/signing/chains/ethereumSigner";
 
 /**
  *
@@ -25,13 +25,13 @@ export async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
 
 	const signature = await serverBundlr.currencyConfig.sign(encodedMessage);
 
-	const isValid = await HexInjectedSolanaSigner.verify(
-		serverBundlr.currencyConfig.getPublicKey() as Buffer,
-		signatureData,
-		signature,
-	);
-
-	return Buffer.from(signature);
+	// const isValid = await EthereumSigner.verify(
+	// 	serverBundlr.currencyConfig.getPublicKey() as Buffer,
+	// 	signatureData,
+	// 	signature,
+	// );
+	// console.log({isValid, signatureData})
+	return Buffer.from(signature)
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
