@@ -14,7 +14,7 @@ export async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
 	const serverBundlr = new Bundlr(
 		//@ts-ignore
 		bundlrNodeAddress,
-		"solana",
+		"matic",
 		key,
 		{
 			providerUrl: rpcUrl,

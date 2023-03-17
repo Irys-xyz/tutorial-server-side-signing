@@ -13,7 +13,7 @@ export async function serverInit(): Promise<Buffer> {
 	const serverBundlr = new Bundlr(
 		//@ts-ignore
 		bundlrNodeAddress,
-		"solana",
+		"matic",
 		key,
 		{
 			providerUrl: rpcUrl,
@@ -23,9 +23,6 @@ export async function serverInit(): Promise<Buffer> {
 	return publicKey;
 }
 
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	res.status(200).json({ pubKey: (await serverInit()).toString("hex") });
 }

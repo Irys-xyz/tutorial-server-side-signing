@@ -15,7 +15,7 @@ export async function lazyFund(filesize: string): Promise<string> {
 	const serverBundlr = new Bundlr(
 		//@ts-ignore
 		bundlrNodeAddress,
-		"solana",
+		"matic",
 		key,
 		{
 			providerUrl: rpcUrl,
@@ -37,10 +37,7 @@ export async function lazyFund(filesize: string): Promise<string> {
 }
 // req: NextApiRequest,
 // res: NextApiResponse,
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const body = JSON.parse(req.body);
 	console.log("lazyFund body=", body);
 	const fundTx = await lazyFund(body);

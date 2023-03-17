@@ -37,19 +37,23 @@ export default function Home() {
 		}
 
 		// obtain the server's public key
-		const pubKeyRes = (await (
-			await fetch("/api/publicKey")
-		).json()) as unknown as {
+		const pubKeyRes = (await (await fetch("/api/publicKey")).json()) as unknown as {
 			pubKey: string;
 		};
 		const pubKey = Buffer.from(pubKeyRes.pubKey, "hex");
 
 		// create a provider
 		const provider = {
+			// for ETH wallets
 			publicKey: {
 				toBuffer: () => pubKey,
-				byteLength: 32,
+				byteLength: 65,
 			},
+			// for SOLANA wallets
+			// publicKey: {
+			// 	toBuffer: () => pubKey,
+			// 	byteLength: 32,
+			// },
 			signMessage: async (message: Uint8Array) => {
 				let convertedMsg = Buffer.from(message).toString("hex");
 				const res = await fetch("/api/signData", {
@@ -80,11 +84,7 @@ export default function Home() {
 
 		// finally create a new WebBundlr object using the
 		// provider created with server info.
-		const bundlr = new WebBundlr(
-			"https://devnet.bundlr.network",
-			"solana",
-			provider,
-		);
+		const bundlr = new WebBundlr("https://devnet.bundlr.network", "matic", provider);
 		await bundlr.ready();
 		console.log("bundlr.ready()=", bundlr);
 
@@ -101,10 +101,7 @@ export default function Home() {
 	};
 
 	return (
-		<div
-			id="about"
-			className="w-full h-screen bg-background text-text pt-10"
-		>
+		<div id="about" className="w-full h-screen bg-background text-text pt-10">
 			<div className="flex flex-col items-start w-full h-full">
 				<div className="pl-5 w-full">
 					<div className="text-left pb-8">
@@ -139,27 +136,17 @@ export default function Home() {
 							</button>
 						</div>
 
-						<p className="text-messageText text-sm text-red">
-							{message}
-						</p>
+						<p className="text-messageText text-sm text-red">{message}</p>
 						{fileUploadedURL && (
 							<p className="text-messageText text-sm text-red">
-								<a
-									className="underline"
-									href={fileUploadedURL}
-									target="_blank"
-								>
+								<a className="underline" href={fileUploadedURL} target="_blank">
 									{fileUploadedURL}
 								</a>
 							</p>
 						)}
 						<p className="text-black text-sm">
 							{uploadedURL && (
-								<a
-									className="underline"
-									href={uploadedURL}
-									target="_blank"
-								>
+								<a className="underline" href={uploadedURL} target="_blank">
 									{uploadedURL}
 								</a>
 							)}
