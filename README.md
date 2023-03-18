@@ -1,5 +1,9 @@
 # Bundlr Server Side Signing
 
+This project has two branches
+1. [A version for Solana-based wallets](https://github.com/Bundlr-Network/tutorial-server-side-signing/tree/master)
+2. [A version for ETH-based wallets](https://github.com/Bundlr-Network/tutorial-server-side-signing/tree/ethwallet)
+
 A sample repository showing how to use Bundlr's Server-Side Signing feature, which is detailed here
 https://docs.bundlr.network/recipes/server-side-signing
 
