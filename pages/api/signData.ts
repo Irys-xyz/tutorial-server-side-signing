@@ -1,6 +1,5 @@
-import Bundlr from "@bundlr-network/client/build/node";
 import type { NextApiRequest, NextApiResponse } from "next";
-import EthereumSigner from "arbundles/src/signing/chains/ethereumSigner";
+import { TypedEthereumSigner } from "arbundles";
 
 /**
  *
@@ -8,30 +7,10 @@ import EthereumSigner from "arbundles/src/signing/chains/ethereumSigner";
  */
 export async function signDataOnServer(signatureData: Buffer): Promise<Buffer> {
 	const key = process.env.PAYMENT_PRIVATE_KEY; // your private key
-	const bundlrNodeAddress = process.env.BUNDLR_NODE_ADDRESS;
-	const rpcUrl = process.env.RPC;
+	if(!key) throw new Error("Private key is undefined!")
+	const signer = new TypedEthereumSigner(key)
+	return Buffer.from(await signer.sign(signatureData))
 
-	const serverBundlr = new Bundlr(
-		//@ts-ignore
-		bundlrNodeAddress,
-		"matic",
-		key,
-		{
-			providerUrl: rpcUrl,
-		},
-	);
-
-	const encodedMessage = Buffer.from(signatureData);
-
-	const signature = await serverBundlr.currencyConfig.sign(encodedMessage);
-
-	// const isValid = await EthereumSigner.verify(
-	// 	serverBundlr.currencyConfig.getPublicKey() as Buffer,
-	// 	signatureData,
-	// 	signature,
-	// );
-	// console.log({isValid, signatureData})
-	return Buffer.from(signature)
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

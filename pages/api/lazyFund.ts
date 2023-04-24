@@ -1,4 +1,4 @@
-import Bundlr from "@bundlr-network/client/build/node";
+import Bundlr from "@bundlr-network/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 /**
