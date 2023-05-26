@@ -5,7 +5,7 @@ This project has two branches
 2. [A version for ETH-based wallets](https://github.com/Bundlr-Network/tutorial-server-side-signing/tree/ethwallet)
 
 A sample repository showing how to use Bundlr's Server-Side Signing feature, which is detailed here
-https://docs.bundlr.network/recipes/server-side-signing
+[https://docs.bundlr.network/recipes/server-side-signing](https://docs.bundlr.network/developer-docs/recipes/gassless-uploading)
 
 Server-side signing is a method to allow you to sign (and pay) for your users' data securely (without exposing your private key).
 
