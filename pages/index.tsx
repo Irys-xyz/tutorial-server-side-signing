@@ -45,7 +45,7 @@ export default function Home() {
 			},
 			getSigner: () => {
 				return {
-					getAddress: () => pubKey, // pubkey is address for TypedEthereumSigner
+					getAddress: () => pubKey.toString(), // pubkey is address for TypedEthereumSigner
 					_signTypedData: async (_domain: never, _types: never, message: { address: string, "Transaction hash": Uint8Array; }) => {
 						let convertedMsg = Buffer.from(message["Transaction hash"]).toString("hex");
 						const res = await fetch("/api/signData", {
